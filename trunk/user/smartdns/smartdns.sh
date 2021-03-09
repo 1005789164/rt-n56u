@@ -7,7 +7,6 @@ ADDRESS_CONF="$SMARTDNS_CONF_DIR/smartdns_address.conf"
 BLACKLIST_IP_CONF="$SMARTDNS_CONF_DIR/smartdns_blacklist-ip.conf"
 WHITELIST_IP_CONF="$SMARTDNS_CONF_DIR/smartdns_whitelist-ip.conf"
 CUSTOM_CONF="$SMARTDNS_CONF_DIR/smartdns_custom.conf"
-GFWLIST_CONF="$SMARTDNS_CONF_DIR/smartdns_gfwlist.conf"
 smartdns_file="/usr/bin/smartdns"
 sdns_enable=`nvram get sdns_enable`
 sdns_name=`nvram get sdns_name`
@@ -81,6 +80,10 @@ echo "cache-size $sdns_cache" >> $SMARTDNS_CONF
 if [ $sdns_ip_change -eq 1 ];then
 echo "dualstack-ip-selection yes" >> $SMARTDNS_CONF
 echo "dualstack-ip-selection-threshold $(nvram get sdns_ip_change_time)" >> $SMARTDNS_CONF
+if [ $sdns_ipv6 -eq 1 ];then
+nvram set sdns_ipv6=0
+logger -t "SmartDNS" "双栈IP优选已开启，不能再开启禁用IPV6解析。"
+fi
 elif [ $sdns_ipv6 -eq 1 ];then
 echo "force-AAAA-SOA yes" >> $SMARTDNS_CONF
 fi
@@ -292,7 +295,6 @@ grep -v '^#' $ADDRESS_CONF | grep -v "^$" >> $SMARTDNS_CONF
 grep -v '^#' $BLACKLIST_IP_CONF | grep -v "^$" >> $SMARTDNS_CONF
 grep -v '^#' $WHITELIST_IP_CONF | grep -v "^$" >> $SMARTDNS_CONF
 grep -v '^#' $CUSTOM_CONF | grep -v "^$" >> $SMARTDNS_CONF
-grep -v '^#' $GFWLIST_CONF | grep -v "^$" >> $SMARTDNS_CONF
 #grep -v ^! /tmp/whitelist.txt >> $SMARTDNS_CONF
 #rm -f /tmp/whitelist.txt
 #grep -v ^! /tmp/blacklist.txt >> $SMARTDNS_CONF

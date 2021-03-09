@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_21#></title>
+<title><#Web_Title#> - <#menu5_24#></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -63,11 +63,10 @@ if(m_list.length > 0){
 }
 function initial(){
 	show_banner(2);
-	show_menu(5,16);
+	show_menu(5,15);
 	show_footer();
 	showTab(getHash());
 	showMRULESList();
-	showmenu();
 	fill_status(smartdns_status());
 }
 
@@ -153,9 +152,6 @@ function markGroupRULES(o, c, b) {
 	document.form.action_mode.value = b;
 	document.form.current_page.value = "Advanced_smartdns.asp#dns";
 	return true;
-}
-function showmenu(){
-showhide_div('adglink', found_app_adguardhome());
 }
 function showMRULESList(){
 	var code = '<table width="100%" cellspacing="0" cellpadding="3" class="table table-list">';
@@ -254,18 +250,8 @@ function showMRULESList(){
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="box well grad_colour_dark_blue">
-                            <h2 class="box_head round_top"><#menu5_24#> - <#menu5_29#></h2>
+                            <h2 class="box_head round_top"><#menu5_24#></h2>
                             <div class="round_bottom">
-							<div>
-                            <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-                                <li class="active">
-                                    <a href="Advanced_smartdns.asp"><#menu5_24#></a>
-                                </li>
-								 <li id="adglink" style="display:none">
-                                    <a href="Advanced_adguardhome.asp"><#menu5_28#></a>
-                                </li>
-                            </ul>
-                        </div>
 						<div>
                             <ul class="nav nav-tabs" style="margin-bottom: 10px;">
                                 <li class="active">
@@ -293,7 +279,7 @@ function showMRULESList(){
                                             <td id="smartdns_status" colspan="2"></td>
                                         </tr>
 
-                                        <tr> <th><#menu5_21_1#></th>
+                                        <tr> <th><#menu5_24_1#></th>
                                             <td>
                                                 <div class="main_itoggle">
                                                 <div id="sdns_enable_on_of">

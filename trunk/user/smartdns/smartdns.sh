@@ -97,7 +97,8 @@ echo "serve-expired yes" >> $SMARTDNS_CONF
 else
 echo "serve-expired no" >> $SMARTDNS_CONF
 fi
-echo "log-level info" >> $SMARTDNS_CONF
+echo "log-level error" >> $SMARTDNS_CONF
+echo "log-size 128K" >> $SMARTDNS_CONF
 listnum=`nvram get sdnss_staticnum_x`
 for i in $(seq 1 $listnum)
 do

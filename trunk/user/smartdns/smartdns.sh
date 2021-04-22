@@ -242,8 +242,10 @@ set_iptable()
 	do
 		if [ "$tcp_server" == "1" ]; then
 			iptables -t nat -A PREROUTING -p tcp -d $IP --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
+			iptables -t nat -A OUTPUT -p tcp -d 127.0.0.1 --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
 		fi
 		iptables -t nat -A PREROUTING -p udp -d $IP --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
+		iptables -t nat -A OUTPUT -p udp -d 127.0.0.1 --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
 	done
 
 	if [ "$ipv6_server" == 0 ]; then
@@ -270,6 +272,8 @@ clear_iptable()
 	do
 		iptables -t nat -D PREROUTING -p udp -d $IP --dport 53 -j REDIRECT --to-ports $OLD_PORT >/dev/null 2>&1
 		iptables -t nat -D PREROUTING -p tcp -d $IP --dport 53 -j REDIRECT --to-ports $OLD_PORT >/dev/null 2>&1
+		iptables -t nat -D OUTPUT -p udp -d 127.0.0.1 --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
+		iptables -t nat -D OUTPUT -p tcp -d 127.0.0.1 --dport 53 -j REDIRECT --to-ports $sdns_port >/dev/null 2>&1
 	done
 
 	if [ "$ipv6_server" == 0 ]; then
